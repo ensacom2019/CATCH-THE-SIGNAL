@@ -35,6 +35,16 @@ const leaderboardListEl = document.querySelector('#leaderboardList');
 const leaderboardStateEl = document.querySelector('#leaderboardState');
 const refreshLeaderboardButton = document.querySelector('#refreshLeaderboardButton');
 
+// Normalize legacy text that was saved with the wrong character encoding.
+document.querySelector('.intro-copy').innerHTML = 'Click every signal in order within 48 seconds.<br />Build your combo and chase a new best.';
+document.querySelector('.hint-divider').textContent = '/';
+document.querySelectorAll('.keycap')[1].textContent = '1 → 5';
+document.querySelector('.hint-copy').textContent = 'CLICK IN ORDER';
+arenaEl.setAttribute('aria-label', 'Game area. Click signals from 1 in order.');
+startOverlayEl.querySelector('p').textContent = 'Collect every signal in order and build your combo.';
+startButton.innerHTML = 'START RUN <span>GO</span>';
+resultTextEl.textContent = 'Your reaction run has been recorded.';
+
 const GAME_SECONDS = 48;
 const BEST_KEY = 'nan-signal-hunt-best';
 let gameState = 'idle';
@@ -226,7 +236,8 @@ function createTarget(number, position, isGreen) {
   target.type = 'button';
   target.className = `target${isGreen ? ' is-green' : ''}`;
   target.dataset.number = String(number);
-  target.setAttribute('aria-label', `${number}踰??좏샇`);
+  target.setAttribute('aria-label', `Signal ${number}`);
+  target.setAttribute('aria-label', `${number}번 신호`);
   target.style.left = `${position.x}px`;
   target.style.top = `${position.y}px`;
   target.innerHTML = `<span class="target-core"></span><span class="target-ring target-ring-one"></span><span class="target-ring target-ring-two"></span><span class="target-number">${number}</span>`;
@@ -235,6 +246,7 @@ function createTarget(number, position, isGreen) {
     handleTargetClick(target);
   });
   targetLayerEl.append(target);
+  target.setAttribute('aria-label', `Signal ${number}`);
   targets.set(number, target);
 }
 
@@ -243,14 +255,16 @@ function createTrap(position) {
   trap.type = 'button';
   trap.className = 'target is-trap';
   trap.dataset.trap = 'true';
-  trap.setAttribute('aria-label', '?⑥젙 ?좏샇');
+  trap.setAttribute('aria-label', 'Trap signal');
+  trap.setAttribute('aria-label', '함정 신호');
   trap.style.left = `${position.x}px`;
   trap.style.top = `${position.y}px`;
-  trap.innerHTML = '<span class="target-core"></span><span class="target-ring target-ring-one"></span><span class="target-ring target-ring-two"></span><span class="target-number target-trap-mark">횞</span>';
+  trap.innerHTML = '<span class="target-core"></span><span class="target-ring target-ring-one"></span><span class="target-ring target-ring-two"></span><span class="target-number target-trap-mark">×</span>';
   trap.addEventListener('click', (event) => {
     event.stopPropagation();
     handleTrapClick(trap);
   });
+  trap.setAttribute('aria-label', 'Trap signal');
   targetLayerEl.append(trap);
 }
 
@@ -404,7 +418,7 @@ function endGame() {
   const previousBest = bestScore();
   if (score > previousBest) localStorage.setItem(BEST_KEY, String(score));
   finalScoreEl.textContent = formatScore(score);
-  resultTextEl.textContent = score > previousBest ? 'NEW BEST ???뱀떊??湲곕줉??媛깆떊?먯뒿?덈떎.' : '48珥??숈븞 ?섏쭛???좏샇 湲곕줉?낅땲??';
+  resultTextEl.textContent = score > previousBest ? 'NEW BEST — RECORD UPDATED.' : 'SIGNALS COLLECTED DURING THE RUN.';
   statusEl.textContent = 'SYSTEM COMPLETE / GOOD RUN';
   endOverlayEl.hidden = false;
   renderHud();
@@ -424,4 +438,3 @@ refreshLeaderboardButton.addEventListener('click', refreshLeaderboard);
 observeAuth(updateSignedInState);
 refreshLeaderboard();
 renderHud();
-
