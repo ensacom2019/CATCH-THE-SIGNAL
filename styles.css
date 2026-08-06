@@ -176,6 +176,11 @@ h1 span:not(.title-dot) { color: var(--blue); }
 .secondary-button, .refresh-button { border: 1px solid rgba(241,242,247,.3); padding: 10px 12px; background: transparent; color: var(--white); font: 700 10px/1 var(--font-mono); letter-spacing: .06em; cursor: pointer; }
 .secondary-button:hover, .refresh-button:hover { border-color: var(--blue); color: var(--blue); }
 .secondary-button:disabled, .primary-button:disabled { cursor: not-allowed; opacity: .46; }
+.google-auth-button { display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 0; border: 0; background: transparent; overflow: hidden; }
+.google-auth-button:hover { border: 0; color: inherit; }
+.google-signin-art { display: block; width: 180px; height: 40px; }
+.google-auth-button.is-signed-in { padding: 10px 12px; border: 1px solid rgba(241,242,247,.3); background: transparent; color: var(--white); }
+.google-auth-button.is-signed-in:hover { border-color: var(--blue); color: var(--blue); }
 .submit-score-box .primary-button { margin-top: 0; }
 .submit-status { min-height: 12px; color: var(--muted); font-size: 8px; letter-spacing: .04em; }
 .submit-status.ready { color: var(--green); }
