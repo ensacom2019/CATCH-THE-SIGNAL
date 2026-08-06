@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 0.2 seconds
+Output:
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
@@ -46,6 +49,7 @@ button { color: inherit; }
 }
 
 .topbar { height: 88px; border-bottom: 1px solid var(--line); }
+.topbar-actions { display: flex; align-items: center; gap: 10px; }
 .brand { display: flex; align-items: baseline; gap: 7px; color: var(--white); text-decoration: none; }
 .brand-mark { font: 700 25px/1 var(--font-display); letter-spacing: .04em; }
 .brand-year { color: var(--orange); font: 700 14px/1 var(--font-mono); }
@@ -53,6 +57,8 @@ button { color: inherit; }
 .topbar-note { display: flex; align-items: center; gap: 9px; }
 .live-dot, .pulse-dot, .status-light { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 13px var(--blue); }
 .topbar-tag { color: var(--orange-soft); border: 1px solid rgba(255, 113, 0, .46); padding: 8px 11px; }
+.sound-toggle { border: 1px solid rgba(28,200,255,.38); padding: 8px 10px; background: transparent; color: var(--blue); font: 700 9px/1 var(--font-mono); letter-spacing: .08em; cursor: pointer; }
+.sound-toggle:hover { border-color: var(--orange); color: var(--orange-soft); }
 
 .layout { width: min(1280px, calc(100% - 64px)); margin: 0 auto; padding: 70px 0 72px; display: grid; grid-template-columns: minmax(320px, .76fr) minmax(560px, 1.24fr); gap: clamp(48px, 6vw, 96px); align-items: start; }
 .eyebrow { margin: 0 0 24px; color: var(--blue); font-size: 11px; letter-spacing: .12em; }
@@ -202,6 +208,8 @@ h1 span:not(.title-dot) { color: var(--blue); }
 @media (max-width: 980px) {
   .topbar, .footer-note, .layout { width: min(100% - 36px, 620px); }
   .topbar-note { display: none; }
+  .topbar-actions { gap: 6px; }
+  .sound-toggle { padding: 7px 8px; font-size: 8px; }
   .layout { padding-top: 58px; grid-template-columns: 1fr; gap: 62px; }
   h1 { font-size: clamp(72px, 20vw, 120px); }
   .mini-stats { margin-top: 40px; }
