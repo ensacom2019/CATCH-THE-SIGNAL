@@ -1,0 +1,37 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /leaderboards/{uid} {
+      allow read: if true;
+
+      allow create: if isOwner(uid)
+        && validEntry()
+        && request.resource.data.userId == uid;
+
+      allow update: if isOwner(uid)
+        && validEntry()
+        && request.resource.data.userId == uid
+        && request.resource.data.score >= resource.data.score
+        && (request.resource.data.score > resource.data.score
+          || request.resource.data.combo >= resource.data.combo);
+
+      allow delete: if false;
+
+      function isOwner(uid) {
+        return request.auth != null && request.auth.uid == uid;
+      }
+
+      function validEntry() {
+        return request.resource.data.nickname is string
+          && request.resource.data.nickname.size() >= 2
+          && request.resource.data.nickname.size() <= 16
+          && request.resource.data.score is int
+          && request.resource.data.score >= 0
+          && request.resource.data.combo is int
+          && request.resource.data.combo >= 0;
+      }
+    }
+  }
+}
+
