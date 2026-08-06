@@ -327,6 +327,7 @@ function spawnRound() {
 }
 
 function registerWrongOrder(target) {
+  if (gameState !== 'running' || !roundActive) return;
   combo = 0;
   statusEl.textContent = `ORDER ERROR / CLICK ${nextNumber}`;
   showFeedback(`NEED ${nextNumber}`, 'miss', target.nodeType ? target : null);
@@ -349,7 +350,7 @@ function completeRound(lastTarget) {
 }
 
 function handleTrapClick(trap) {
-  if (gameState !== 'running' || trap.disabled) return;
+  if (gameState !== 'running' || !roundActive || trap.disabled || trap.classList.contains('is-trap-hit')) return;
   trap.disabled = true;
   combo = 0;
   score = Math.max(0, score - 100);
@@ -362,7 +363,7 @@ function handleTrapClick(trap) {
 }
 
 function handleTargetClick(target) {
-  if (gameState !== 'running' || !roundActive) return;
+  if (gameState !== 'running' || !roundActive || target.disabled || target.classList.contains('is-hit')) return;
   const number = Number(target.dataset.number);
   if (number !== nextNumber) {
     registerWrongOrder(target);
