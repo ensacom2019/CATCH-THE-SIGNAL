@@ -34,6 +34,7 @@ const submitStatusEl = document.querySelector('#submitStatus');
 const leaderboardListEl = document.querySelector('#leaderboardList');
 const leaderboardStateEl = document.querySelector('#leaderboardState');
 const refreshLeaderboardButton = document.querySelector('#refreshLeaderboardButton');
+const googleSignInMarkup = '<img class="google-signin-art" src="google-signin-button.svg" alt="Sign in with Google" />';
 let restartRevealTimer = null;
 
 // Normalize legacy text that was saved with the wrong character encoding.
@@ -106,7 +107,9 @@ async function refreshLeaderboard() {
 async function updateSignedInState(user) {
   currentUser = user;
   submitScoreButton.disabled = !user;
-  googleSignInButton.textContent = user ? 'SIGN OUT GOOGLE' : 'SIGN IN WITH GOOGLE';
+  googleSignInButton.innerHTML = user ? 'SIGN OUT' : googleSignInMarkup;
+  googleSignInButton.classList.toggle('is-signed-in', Boolean(user));
+  googleSignInButton.setAttribute('aria-label', user ? 'Sign out' : 'Sign in with Google');
   if (!user) {
     nicknameInput.value = '';
     setSubmitStatus('GOOGLE LOGIN REQUIRED TO SUBMIT');
