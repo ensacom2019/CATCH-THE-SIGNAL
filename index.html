@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b0b16" />
     <title>NAN // SIGNAL HUNT</title>
-    <link rel="stylesheet" href="styles.css?v=5" />
+    <link rel="stylesheet" href="styles.css?v=6" />
   </head>
   <body>
     <div class="page-glow page-glow-blue" aria-hidden="true"></div>
@@ -90,7 +90,6 @@
               <button id="startButton" class="primary-button">START RUN <span>GO</span></button>
             </div>
             <div class="end-overlay" id="endOverlay" hidden>
-              <span class="overlay-index">RUN COMPLETE</span>
               <h2>SIGNAL<br /><span>CAPTURED.</span></h2>
               <p id="resultText">Your reaction run has been recorded.</p>
               <div class="result-score"><span>FINAL SCORE</span><strong id="finalScore">000000</strong></div>
@@ -100,7 +99,7 @@
                 <button id="submitScoreButton" class="primary-button" type="button" disabled>SUBMIT SCORE <span>GO</span></button>
                 <small id="submitStatus" class="submit-status" aria-live="polite"></small>
               </div>
-              <button id="restartButton" class="primary-button">RUN AGAIN <span>GO</span></button>
+              <button id="restartButton" class="primary-button" hidden>RUN AGAIN <span>GO</span></button>
             </div>
           </div>
 
@@ -113,6 +112,6 @@
       </section>
     </main>
 
-    <script type="module" src="game.js?v=6"></script>
+    <script type="module" src="game.js?v=7"></script>
   </body>
 </html>
