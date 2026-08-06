@@ -34,7 +34,7 @@ const submitStatusEl = document.querySelector('#submitStatus');
 const leaderboardListEl = document.querySelector('#leaderboardList');
 const leaderboardStateEl = document.querySelector('#leaderboardState');
 const refreshLeaderboardButton = document.querySelector('#refreshLeaderboardButton');
-const googleSignInMarkup = '<img class="google-signin-art" src="google-signin-button.svg" alt="Sign in with Google" />';
+const googleSignInMarkup = '<img class="google-signin-art" src="google-signin-button.svg/google-signin-button.svg" alt="Sign in with Google" />';
 let restartRevealTimer = null;
 let suppressNextArenaClick = false;
 
