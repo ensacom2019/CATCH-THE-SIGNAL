@@ -96,13 +96,13 @@ h1 span:not(.title-dot) { color: var(--blue); }
 .combo-block.combo-pulse { animation: combo-pulse .34s ease-out; }
 @keyframes combo-pulse { 0% { transform: scale(1); } 45% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
-.arena { position: relative; height: min(52vh, 465px); min-height: 360px; margin-top: 14px; overflow: hidden; background: #0b0b16; border: 1px solid rgba(28,200,255,.28); isolation: isolate; }
+.arena { position: relative; height: min(52vh, 465px); min-height: 360px; margin-top: 14px; overflow: hidden; touch-action: none; background: #0b0b16; border: 1px solid rgba(28,200,255,.28); isolation: isolate; }
 .arena-grid { position: absolute; inset: 0; opacity: .7; background-image: linear-gradient(rgba(28,200,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(28,200,255,.08) 1px, transparent 1px); background-size: 42px 42px; transform: perspective(500px) rotateX(52deg) scale(1.3) translateY(80px); transform-origin: center bottom; }
 .arena::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, transparent 0 17%, rgba(11,11,22,.1) 44%, rgba(11,11,22,.8) 100%); pointer-events: none; }
 .arena-corner { position: absolute; z-index: 2; width: 18px; height: 18px; border-color: rgba(241,242,247,.55); border-style: solid; }
 .corner-tl { top: 15px; left: 15px; border-width: 1px 0 0 1px; } .corner-tr { top: 15px; right: 15px; border-width: 1px 1px 0 0; } .corner-bl { bottom: 15px; left: 15px; border-width: 0 0 1px 1px; } .corner-br { bottom: 15px; right: 15px; border-width: 0 1px 1px 0; }
 .target-layer { position: absolute; z-index: 4; inset: 0; }
-.target { position: absolute; z-index: 5; display: grid; place-items: center; width: 70px; height: 70px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--white); cursor: crosshair; transform: translate(-50%, -50%); animation: target-in .18s ease-out both; filter: drop-shadow(0 0 10px rgba(28,200,255,.75)); transition: filter .15s ease; }
+.target { position: absolute; z-index: 5; display: grid; place-items: center; width: 70px; height: 70px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--white); cursor: crosshair; touch-action: none; -webkit-tap-highlight-color: transparent; transform: translate(-50%, -50%); animation: target-in .18s ease-out both; filter: drop-shadow(0 0 10px rgba(28,200,255,.75)); transition: filter .15s ease; }
 .target-number { position: relative; z-index: 2; font: 800 25px/1 var(--font-display); text-shadow: 0 2px 10px rgba(11,11,22,.7); }
 .target:hover .target-core { transform: scale(1.18); }
 .target-core { position: absolute; inset: 22px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 16px 5px rgba(28,200,255,.6), inset 0 0 0 2px rgba(255,255,255,.9); transition: transform .12s ease; }
@@ -144,7 +144,7 @@ h1 span:not(.title-dot) { color: var(--blue); }
 
 .start-overlay, .end-overlay { position: absolute; z-index: 10; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px; background: linear-gradient(180deg, rgba(11,11,22,.72), rgba(11,11,22,.9)); }
 .start-overlay[hidden], .end-overlay[hidden] { display: none; }
-.end-overlay { justify-content: flex-start; overflow-y: auto; padding: 22px 32px 26px; scrollbar-width: thin; }
+.end-overlay { justify-content: center; overflow: hidden; padding: 18px 32px 20px; }
 .overlay-index { margin-bottom: 19px; color: var(--blue); font-size: 9px; letter-spacing: .18em; }
 .start-overlay h2, .end-overlay h2 { font: 800 clamp(55px, 8vw, 88px)/.8 var(--font-display); letter-spacing: -.04em; }
 .end-overlay h2 { font-size: clamp(48px, 7vw, 72px); }
@@ -213,6 +213,15 @@ h1 span:not(.title-dot) { color: var(--blue); }
   .hint-copy { width: 100%; margin: 3px 0 0; }
   .score-row > div { padding: 12px 9px; } .score-block strong { font-size: 27px; } .combo-block strong, .time-block strong { font-size: 25px; }
   .arena { min-height: 330px; height: 58vh; }
+  .end-overlay { padding: 12px 14px 16px; }
+  .end-overlay h2 { font-size: 44px; }
+  .end-overlay p { margin-top: 8px; font-size: 12px; }
+  .end-overlay .result-score { margin-top: 8px; }
+  .end-overlay .submit-score-box { margin-top: 8px; gap: 5px; }
+  .end-overlay .nickname-input { padding: 9px 10px; }
+  .end-overlay .secondary-button { padding: 8px 10px; }
+  .end-overlay .submit-score-box .primary-button { padding: 10px 14px 9px; }
+  .end-overlay #restartButton { margin-top: 8px; padding: 10px 16px 9px; }
   .game-caption { display: grid; gap: 7px; }
   .footer-note { display: grid; gap: 10px; font-size: 8px; }
   .leaderboard-panel { margin-top: 42px; padding: 15px; }
