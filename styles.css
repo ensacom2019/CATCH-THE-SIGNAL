@@ -70,7 +70,7 @@ h1 span:not(.title-dot) { color: var(--blue); }
 .mini-stats div { display: grid; gap: 5px; }
 .mini-stats strong { color: var(--orange); font: 700 23px/1 var(--font-display); }
 .mini-stats span { color: var(--muted); font-size: 9px; letter-spacing: .13em; }
-.game-stats { justify-content: space-between; margin: 0 0 22px; padding: 0 12px; }
+.game-stats { justify-content: flex-start; gap: 30px; margin: 0 0 22px; padding: 0 12px; }
 .game-stats div { min-width: 92px; }
 
 .game-wrap { min-width: 0; }
