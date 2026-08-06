@@ -36,7 +36,7 @@ const leaderboardStateEl = document.querySelector('#leaderboardState');
 const refreshLeaderboardButton = document.querySelector('#refreshLeaderboardButton');
 
 // Normalize legacy text that was saved with the wrong character encoding.
-document.querySelector('.intro-copy').innerHTML = 'Click every signal in order within 48 seconds.<br />Build your combo and chase a new best.';
+document.querySelector('.intro-copy').innerHTML = '48초 안에 신호를 순서대로 클릭하세요.<br />콤보를 쌓아 최고 기록에 도전하세요.';
 document.querySelector('.hint-divider').textContent = '/';
 document.querySelectorAll('.keycap')[1].textContent = '1 → 5';
 document.querySelector('.hint-copy').textContent = 'CLICK IN ORDER';
