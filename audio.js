@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 0.2 seconds
-Output:
 let audioContext = null;
 let masterGain = null;
 let musicGain = null;
