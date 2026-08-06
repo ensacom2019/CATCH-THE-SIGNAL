@@ -36,7 +36,6 @@ const leaderboardStateEl = document.querySelector('#leaderboardState');
 const refreshLeaderboardButton = document.querySelector('#refreshLeaderboardButton');
 const googleSignInMarkup = '<img class="google-signin-art" src="google-signin-button.svg/google-signin-button.svg" alt="Sign in with Google" />';
 let restartRevealTimer = null;
-let suppressNextArenaClick = false;
 
 // Normalize legacy text that was saved with the wrong character encoding.
 document.querySelector('.intro-copy').innerHTML = '48초 안에 신호를 순서대로 클릭하세요.<br />콤보를 쌓아 최고 기록에 도전하세요.';
@@ -236,17 +235,6 @@ function isFarEnough(candidate, positions) {
   return positions.every((position) => Math.hypot(candidate.x - position.x, candidate.y - position.y) > 92);
 }
 
-function bindGamePointer(element, handler) {
-  element.addEventListener('pointerdown', (event) => {
-    if (event.pointerType === 'mouse' && event.button !== 0) return;
-    event.preventDefault();
-    event.stopPropagation();
-    suppressNextArenaClick = true;
-    window.setTimeout(() => { suppressNextArenaClick = false; }, 600);
-    handler(element);
-  });
-}
-
 function createTarget(number, position, isGreen) {
   const target = document.createElement('button');
   target.type = 'button';
@@ -257,7 +245,10 @@ function createTarget(number, position, isGreen) {
   target.style.left = `${position.x}px`;
   target.style.top = `${position.y}px`;
   target.innerHTML = `<span class="target-core"></span><span class="target-ring target-ring-one"></span><span class="target-ring target-ring-two"></span><span class="target-number">${number}</span>`;
-  bindGamePointer(target, handleTargetClick);
+  target.addEventListener('click', (event) => {
+    event.stopPropagation();
+    handleTargetClick(target);
+  });
   targetLayerEl.append(target);
   target.setAttribute('aria-label', `Signal ${number}`);
   targets.set(number, target);
@@ -273,7 +264,10 @@ function createTrap(position) {
   trap.style.left = `${position.x}px`;
   trap.style.top = `${position.y}px`;
   trap.innerHTML = '<span class="target-core"></span><span class="target-ring target-ring-one"></span><span class="target-ring target-ring-two"></span><span class="target-number target-trap-mark">×</span>';
-  bindGamePointer(trap, handleTrapClick);
+  trap.addEventListener('click', (event) => {
+    event.stopPropagation();
+    handleTrapClick(trap);
+  });
   trap.setAttribute('aria-label', 'Trap signal');
   targetLayerEl.append(trap);
 }
@@ -442,10 +436,6 @@ function endGame() {
 }
 
 arenaEl.addEventListener('click', (event) => {
-  if (suppressNextArenaClick) {
-    suppressNextArenaClick = false;
-    return;
-  }
   if (gameState === 'running' && !event.target.closest('.target, .start-overlay, .end-overlay')) registerWrongOrder({ classList: { remove() {}, add() {} } });
 });
 document.addEventListener('keydown', (event) => {
