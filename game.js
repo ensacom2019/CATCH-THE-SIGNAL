@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 0.2 seconds
+Output:
 import {
   getCurrentProfile,
   getLeaderboard,
@@ -6,6 +9,7 @@ import {
   signInWithGoogle,
   signOutUser,
 } from './firebase.js';
+import { initAudio, playSfx, toggleAudio } from './audio.js';
 
 const scoreEl = document.querySelector('#score');
 const comboEl = document.querySelector('#combo');
@@ -34,6 +38,7 @@ const submitStatusEl = document.querySelector('#submitStatus');
 const leaderboardListEl = document.querySelector('#leaderboardList');
 const leaderboardStateEl = document.querySelector('#leaderboardState');
 const refreshLeaderboardButton = document.querySelector('#refreshLeaderboardButton');
+const soundToggle = document.querySelector('#soundToggle');
 const googleSignInMarkup = '<img class="google-signin-art" src="google-signin-button.svg/google-signin-button.svg" alt="Sign in with Google" />';
 let restartRevealTimer = null;
 
@@ -322,6 +327,7 @@ function spawnRound() {
 
 function registerWrongOrder(target) {
   if (gameState !== 'running' || !roundActive) return;
+  playSfx('miss');
   combo = 0;
   statusEl.textContent = `ORDER ERROR / CLICK ${nextNumber}`;
   showFeedback(`NEED ${nextNumber}`, 'miss', target.nodeType ? target : null);
@@ -336,6 +342,7 @@ function completeRound(lastTarget) {
   const multiplier = getComboMultiplier(combo);
   const bonus = Math.round((100 + Math.min(round, 12) * 10) * multiplier);
   score += bonus;
+  playSfx('clear');
   statusEl.textContent = `ROUND ${String(round).padStart(2, '0')} CLEAR / NEXT SET`;
   showFeedback(`SET CLEAR +${bonus}`, 'perfect', lastTarget);
   spawnImpact(lastTarget, 'var(--orange)');
@@ -346,6 +353,7 @@ function completeRound(lastTarget) {
 function handleTrapClick(trap) {
   if (gameState !== 'running' || !roundActive || trap.disabled || trap.classList.contains('is-trap-hit')) return;
   trap.disabled = true;
+  playSfx('trap');
   combo = 0;
   score = Math.max(0, score - 100);
   statusEl.textContent = 'TRAP HIT / COMBO RESET';
@@ -366,6 +374,7 @@ function handleTargetClick(target) {
 
   target.classList.add('is-hit');
   target.disabled = true;
+  playSfx('hit', combo + 1);
   combo += 1;
   bestComboThisRun = Math.max(bestComboThisRun, combo);
   const multiplier = getComboMultiplier(combo);
@@ -387,6 +396,8 @@ function handleTargetClick(target) {
 }
 
 function startGame() {
+  initAudio();
+  playSfx('start');
   window.clearInterval(beatTimer);
   window.clearTimeout(nextRoundTimer);
   window.clearTimeout(restartRevealTimer);
@@ -427,6 +438,7 @@ function endGame() {
   finalScoreEl.textContent = formatScore(score);
   resultTextEl.textContent = score > previousBest ? 'NEW BEST — RECORD UPDATED.' : 'SIGNALS COLLECTED DURING THE RUN.';
   statusEl.textContent = 'SYSTEM COMPLETE / GOOD RUN';
+  playSfx('end');
   endOverlayEl.hidden = false;
   restartButton.hidden = true;
   restartRevealTimer = window.setTimeout(() => {
@@ -446,6 +458,11 @@ restartButton.addEventListener('click', startGame);
 googleSignInButton.addEventListener('click', handleGoogleButton);
 submitScoreButton.addEventListener('click', handleSubmitScore);
 refreshLeaderboardButton.addEventListener('click', refreshLeaderboard);
+soundToggle.addEventListener('click', () => {
+  const enabled = toggleAudio();
+  soundToggle.textContent = enabled ? 'SOUND ON' : 'SOUND OFF';
+  soundToggle.setAttribute('aria-pressed', String(enabled));
+});
 observeAuth(updateSignedInState);
 refreshLeaderboard();
 renderHud();
