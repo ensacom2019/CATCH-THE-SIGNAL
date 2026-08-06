@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,14 +22,14 @@
       <section class="intro" aria-labelledby="title">
         <h1 id="title">CATCH<br /><em>THE</em> SIGNAL<span class="title-dot">.</span></h1>
         <p class="intro-copy">
-          ?먯쓣 1遺???쒖꽌?濡??대┃?섏꽭??<br />
-          鍮④컙 X ?⑥젙? ?쇳빐??肄ㅻ낫媛 ?좎??⑸땲??
+          Click every signal in order within 48 seconds.<br />
+          Build your combo and chase a new best.
         </p>
         <div class="control-hint">
           <span class="keycap">CLICK</span>
-          <span class="hint-divider">??/span>
-          <span class="keycap">1 ??5</span>
-          <span class="hint-copy">踰덊샇 ?쒖꽌?濡쒕쭔 ?듦낵!</span>
+          <span class="hint-divider">/</span>
+          <span class="keycap">1 → 5</span>
+          <span class="hint-copy">CLICK IN ORDER</span>
         </div>
         <div class="mini-stats" aria-label="game rules">
           <div><strong>+100</strong><span>HIT</span></div>
@@ -61,7 +61,7 @@
             </div>
           </div>
 
-          <div class="arena" id="arena" tabindex="0" aria-label="寃뚯엫 ?곸뿭. 踰덊샇媛 遺숈? ?먯쓣 1遺???쒖꽌?濡??대┃?섏꽭??">
+          <div class="arena" id="arena" tabindex="0" aria-label="Game area. Click signals from 1 in order.">
             <div class="arena-grid" aria-hidden="true"></div>
             <div class="arena-corner corner-tl" aria-hidden="true"></div>
             <div class="arena-corner corner-tr" aria-hidden="true"></div>
@@ -75,13 +75,13 @@
             <div class="start-overlay" id="startOverlay">
               <span class="overlay-index">01 / 01</span>
               <h2>READY TO<br /><span>HUNT?</span></h2>
-              <p>臾댁옉?꾨줈 ?섑???踰덊샇瑜?1遺???쒖꽌?濡?鍮좊Ⅴ寃??섏쭛?섏꽭??</p>
-              <button id="startButton" class="primary-button">START RUN <span>??/span></button>
+              <p>Collect every signal in order and build your combo.</p>
+              <button id="startButton" class="primary-button">START RUN <span>GO</span></button>
             </div>
             <div class="end-overlay" id="endOverlay" hidden>
               <span class="overlay-index">RUN COMPLETE</span>
               <h2>SIGNAL<br /><span>CAPTURED.</span></h2>
-              <p id="resultText">?뱀떊??諛섏쓳 ?띾룄瑜?湲곕줉?덉뒿?덈떎.</p>
+              <p id="resultText">Your reaction run has been recorded.</p>
               <div class="result-score"><span>FINAL SCORE</span><strong id="finalScore">000000</strong></div>
               <div class="submit-score-box">
                 <input id="nicknameInput" class="nickname-input" maxlength="16" placeholder="NICKNAME" autocomplete="nickname" />
@@ -89,7 +89,7 @@
                 <button id="submitScoreButton" class="primary-button" type="button" disabled>SUBMIT SCORE <span>GO</span></button>
                 <small id="submitStatus" class="submit-status" aria-live="polite"></small>
               </div>
-              <button id="restartButton" class="primary-button">RUN AGAIN <span>??/span></button>
+              <button id="restartButton" class="primary-button">RUN AGAIN <span>GO</span></button>
             </div>
           </div>
 
@@ -113,7 +113,6 @@
       </section>
     </main>
 
-    <script type="module" src="game.js?v=4"></script>
+    <script type="module" src="game.js?v=5"></script>
   </body>
 </html>
-
