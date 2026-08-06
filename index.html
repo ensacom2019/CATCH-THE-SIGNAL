@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b0b16" />
     <title>NAN // SIGNAL HUNT</title>
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="stylesheet" href="styles.css?v=7" />
   </head>
   <body>
     <div class="page-glow page-glow-blue" aria-hidden="true"></div>
@@ -95,7 +95,9 @@
               <div class="result-score"><span>FINAL SCORE</span><strong id="finalScore">000000</strong></div>
               <div class="submit-score-box">
                 <input id="nicknameInput" class="nickname-input" maxlength="16" placeholder="NICKNAME" autocomplete="nickname" />
-                <button id="googleSignInButton" class="secondary-button" type="button">SIGN IN WITH GOOGLE</button>
+                <button id="googleSignInButton" class="secondary-button google-auth-button" type="button" aria-label="Sign in with Google">
+                  <img class="google-signin-art" src="google-signin-button.svg" alt="Sign in with Google" />
+                </button>
                 <button id="submitScoreButton" class="primary-button" type="button" disabled>SUBMIT SCORE <span>GO</span></button>
                 <small id="submitStatus" class="submit-status" aria-live="polite"></small>
               </div>
@@ -112,6 +114,6 @@
       </section>
     </main>
 
-    <script type="module" src="game.js?v=7"></script>
+    <script type="module" src="game.js?v=8"></script>
   </body>
 </html>
