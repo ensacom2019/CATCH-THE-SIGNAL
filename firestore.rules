@@ -7,14 +7,21 @@ service cloud.firestore {
 
       allow create: if isOwner(uid)
         && validEntry()
-        && request.resource.data.userId == uid;
+        && request.resource.data.userId == uid
+        && request.resource.data.keys().hasOnly([
+          'nickname', 'score', 'combo', 'userId', 'savedAt'
+        ]);
 
       allow update: if isOwner(uid)
         && validEntry()
         && request.resource.data.userId == uid
+        && request.resource.data.keys().hasOnly([
+          'nickname', 'score', 'combo', 'userId', 'savedAt'
+        ])
         && request.resource.data.score >= resource.data.score
         && (request.resource.data.score > resource.data.score
-          || request.resource.data.combo >= resource.data.combo);
+          || request.resource.data.combo >= resource.data.combo)
+        && request.resource.data.savedAt >= resource.data.savedAt;
 
       allow delete: if false;
 
@@ -29,7 +36,8 @@ service cloud.firestore {
           && request.resource.data.score is int
           && request.resource.data.score >= 0
           && request.resource.data.combo is int
-          && request.resource.data.combo >= 0;
+          && request.resource.data.combo >= 0
+          && request.resource.data.savedAt is timestamp;
       }
     }
   }
